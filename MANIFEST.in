@@ -1,0 +1,14 @@
+include LICENSE
+include README.md
+include packaging.json
+include ed25519_verifier.py
+include verify_bundle.py
+recursive-include migrations *.sql
+recursive-include models *.json
+# the built SPA (JS/CSS/assets) is produced by `npm run build` in frontend/ and
+# lands in longwatch/static/ — it ships inside the wheel/sdist
+recursive-include longwatch/static *
+# the documentation set README.md links to (product guide, architecture, API,
+# UI, operations, runnable examples) rides along so the links resolve in an sdist
+recursive-include docs *
+global-exclude __pycache__ *.py[cod]

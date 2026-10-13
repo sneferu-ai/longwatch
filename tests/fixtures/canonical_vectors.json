@@ -1,0 +1,128 @@
+{
+  "schema": "longwatch-canonical-vectors-v1",
+  "vectors": [
+    {
+      "canonical": "{}",
+      "name": "empty_object",
+      "value": {}
+    },
+    {
+      "canonical": "[]",
+      "name": "empty_array",
+      "value": []
+    },
+    {
+      "canonical": "{\"a\":{\"n\":null,\"t\":true},\"b\":[1,2,{\"a\":{},\"z\":[]}]}",
+      "name": "nested_containers",
+      "value": {
+        "a": {
+          "n": null,
+          "t": true
+        },
+        "b": [
+          1,
+          2,
+          {
+            "a": {},
+            "z": []
+          }
+        ]
+      }
+    },
+    {
+      "canonical": "{\"emoji\":\"\ud83c\udf19\",\"name\":\"caf\u00e9 \u2014 na\u00efve \u65e5\u672c\u8a9e\"}",
+      "name": "non_ascii_strings",
+      "value": {
+        "emoji": "\ud83c\udf19",
+        "name": "caf\u00e9 \u2014 na\u00efve \u65e5\u672c\u8a9e"
+      }
+    },
+    {
+      "canonical": "{\"s\":\"he said \\\"hi\\\" \\\\ and left\"}",
+      "name": "string_escapes_quote_backslash",
+      "value": {
+        "s": "he said \"hi\" \\ and left"
+      }
+    },
+    {
+      "canonical": "{\"s\":\"a\\bb\\tc\\nd\\fe\\rf\"}",
+      "name": "string_escape_classes",
+      "value": {
+        "s": "a\bb\tc\nd\fe\rf"
+      }
+    },
+    {
+      "canonical": "{\"s\":\"\\u0000\\u0001\\u001f\u007f\"}",
+      "name": "control_characters",
+      "value": {
+        "s": "\u0000\u0001\u001f\u007f"
+      }
+    },
+    {
+      "canonical": "{\"max\":9007199254740991,\"min\":-9007199254740991,\"ms\":1751328000000,\"one\":1,\"zero\":0}",
+      "name": "boundary_integers",
+      "value": {
+        "max": 9007199254740991,
+        "min": -9007199254740991,
+        "ms": 1751328000000,
+        "one": 1,
+        "zero": 0
+      }
+    },
+    {
+      "canonical": "{\"f\":false,\"n\":null,\"t\":true}",
+      "name": "booleans_and_null",
+      "value": {
+        "f": false,
+        "n": null,
+        "t": true
+      }
+    },
+    {
+      "canonical": "{\"A\":3,\"Z\":6,\"_x\":4,\"a\":2,\"aa\":5,\"b\":1}",
+      "name": "key_sort_order",
+      "value": {
+        "A": 3,
+        "Z": 6,
+        "_x": 4,
+        "a": 2,
+        "aa": 5,
+        "b": 1
+      }
+    },
+    {
+      "canonical": "[{\"class\":\"dog\",\"score\":80},{\"class\":\"person\",\"score\":12}]",
+      "name": "array_of_objects",
+      "value": [
+        {
+          "class": "dog",
+          "score": 80
+        },
+        {
+          "class": "person",
+          "score": 12
+        }
+      ]
+    },
+    {
+      "canonical": "{\"event_type\":\"DECISION_RECORDED\",\"payload\":{\"action\":\"accept\",\"class\":\"dog\",\"motion_milli\":3,\"note\":null,\"span_ms\":[0,100000],\"src_viewed\":false},\"prev_hash\":\"0000000000000000000000000000000000000000000000000000000000000000\",\"seq\":42}",
+      "name": "ledger_shaped_payload",
+      "value": {
+        "event_type": "DECISION_RECORDED",
+        "payload": {
+          "action": "accept",
+          "class": "dog",
+          "motion_milli": 3,
+          "note": null,
+          "span_ms": [
+            0,
+            100000
+          ],
+          "src_viewed": false
+        },
+        "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "seq": 42
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "plan_sha256": "e30ea9fcf1189b6dca9f7fc21c45d03b9d132575e9082799cb67977c4d567ec4",
+  "schema": "sneferu.sod.runtime-graph/v1",
+  "services": [
+    {
+      "command": [],
+      "connection_env": "DATABASE_URL",
+      "depends_on": [],
+      "image": "sha256:721873c34ceb9f8d8fc265984940dc982404c105f19ad51be9fdc5970a6080ea",
+      "kind": "postgres",
+      "name": "postgres"
+    }
+  ],
+  "storage": [
+    {
+      "name": "longwatch_data",
+      "path": "/data",
+      "persistent": true
+    }
+  ]
+}

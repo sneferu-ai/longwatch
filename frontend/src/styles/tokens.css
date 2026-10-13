@@ -1,0 +1,239 @@
+/* LongWatch — the closed token layer.
+ *
+ * Every colour, size, duration and z-index in this application is declared
+ * here and consumed by name. Nothing outside this file may contain a hex
+ * colour, an rgb()/rgba() literal, a px value or a duration; the single
+ * documented exception is the media-query breakpoints, where CSS custom
+ * properties cannot be used (see frontend/scripts/token-audit.mjs).
+ *
+ * Themes: dark is the product default (video work happens in a dark room; the
+ * player is the brightest object on screen). Light is a designed peer — warm
+ * paper, ink text — selected by [data-theme="light"], which index.html sets
+ * before first paint from localStorage or prefers-color-scheme.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* ---------------------------------------------------------------- colour */
+  --bg-base: #0c0d0f;
+  --bg-elevated: #141519;
+  --bg-overlay: #1b1d22;
+  --bg-inset: #08090a;
+  --bg-scrim: rgba(6, 6, 7, 0.62);
+
+  --fg-primary: #e9e6df;
+  --fg-secondary: #a9a69e;
+  --fg-tertiary: #8a8780;
+  --fg-disabled: #5a5852;
+  --fg-inverse: #0c0d0f;
+
+  --accent: #e2a44f;
+  --accent-hover: #f0b768;
+  --accent-pressed: #c88c3b;
+  --accent-ink: #1a1305;
+  --accent-quiet: rgba(226, 164, 79, 0.13);
+  --accent-line: rgba(226, 164, 79, 0.38);
+
+  --border-subtle: #22242a;
+  --border-default: #2e3138;
+  --border-strong: #4a4e58;
+  --border-control: #6b6f7a;
+  --border-focus: #e2a44f;
+
+  /* status — hue is never the only signal; every use pairs a glyph or a word.
+     open/orphan are the muted grey pair: the chip draws them on their own
+     quiet tint, so the ink is light enough to clear 4.5:1 there (the
+     contrast audit checks the pair the chip actually renders). */
+  --status-open: #92908a;
+  --status-running: #e2a44f;
+  --status-paused: #8fa3b0;
+  --status-halted: #d5814c;
+  --status-complete: #7fb069;
+  --status-failed: #e06a4e;
+  --status-orphan: #92908a;
+  --status-accepted: #7fb069;
+  --status-rejected: #8e8b84;
+  --status-flagged: #e2a44f;
+  --status-ml-failed: #e06a4e;
+
+  --status-open-quiet: rgba(146, 144, 138, 0.12);
+  --status-running-quiet: rgba(226, 164, 79, 0.12);
+  --status-complete-quiet: rgba(127, 176, 105, 0.13);
+  --status-failed-quiet: rgba(224, 106, 78, 0.14);
+  --status-paused-quiet: rgba(143, 163, 176, 0.12);
+
+  /* the traces — the product's signature data surface */
+  --trace-motion: #e2a44f;
+  --trace-luma: #7c7a74;
+  --trace-presence: rgba(226, 164, 79, 0.22);
+  --trace-audio: #8fa3b0;
+  --trace-grid: #1e2024;
+  --trace-window: rgba(233, 230, 223, 0.28);
+  --trace-playhead: #e9e6df;
+  --player-bg: #000000;
+
+  /* ------------------------------------------------------------ typography */
+  --font-display: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-xs: 11px;
+  --text-sm: 12px;
+  --text-base: 14px;
+  --text-lg: 16px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+
+  --line-tight: 1.2;
+  --line-snug: 1.35;
+  --line-normal: 1.5;
+  --line-relaxed: 1.65;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  --tracking-wide: 0.08em;
+  --tracking-wider: 0.14em;
+
+  /* --------------------------------------------------------------- spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ----------------------------------------------------------------- shape */
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 10px;
+  --radius-pill: 999px;
+  --radius-full: 9999px;
+
+  /* ------------------------------------------------------------- elevation
+   * Panels, rows and tables never carry a shadow — hairlines only (DESIGN § 1,
+   * pattern 2). The scale exists for true overlays. */
+  --shadow-0: none;
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-2: 0 6px 16px rgba(0, 0, 0, 0.5);
+  --shadow-3: 0 16px 48px rgba(0, 0, 0, 0.62);
+  --shadow-4: 0 24px 64px rgba(0, 0, 0, 0.72);
+
+  /* ---------------------------------------------------------------- motion */
+  --dur-instant: 50ms;
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+
+  /* --------------------------------------------------------------- z-index */
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-modal-bg: 30;
+  --z-modal: 40;
+  --z-cmd: 50;
+  --z-toast: 60;
+
+  /* ---------------------------------------------------------------- layout */
+  --hairline: 1px;
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --hit-min: 44px;
+  --header-h: 52px;
+  --rail-width: 384px;
+  --col-aside-min: 260px;
+  --col-aside-max: 360px;
+  --modal-w: 560px;
+  --toast-w: 420px;
+  --kv-key-min: 140px;
+  --kv-key-max: 220px;
+  --page-max: 1480px;
+  --prose-max: 76ch;
+  --row-h: 40px;
+  --queue-row-h: 56px;
+  --strip-h: 88px;
+  --overview-h: 24px;
+  --scrollbar-w: 10px;
+  --blur-scrim: 6px;
+}
+
+[data-theme='light'] {
+  color-scheme: light;
+
+  --bg-base: #f4f2ed;
+  --bg-elevated: #fcfbf8;
+  --bg-overlay: #ffffff;
+  --bg-inset: #eae7e0;
+  --bg-scrim: rgba(40, 38, 34, 0.38);
+
+  --fg-primary: #1a1b1d;
+  --fg-secondary: #4c4a46;
+  --fg-tertiary: #5f5c56;
+  --fg-disabled: #a5a29b;
+  --fg-inverse: #fcfbf8;
+
+  --accent: #7a5210;
+  --accent-hover: #6a4710;
+  --accent-pressed: #573a0c;
+  --accent-ink: #ffffff;
+  --accent-quiet: rgba(154, 106, 30, 0.1);
+  --accent-line: rgba(154, 106, 30, 0.4);
+
+  --border-subtle: #e4e0d7;
+  --border-default: #d2cdc2;
+  --border-strong: #a8a294;
+  --border-control: #8f8a7d;
+  --border-focus: #7a5210;
+
+  --status-open: #5f5c56;
+  --status-running: #7a4e0e;
+  --status-paused: #41616f;
+  --status-halted: #8c4a22;
+  --status-complete: #2f6b3e;
+  --status-failed: #a33b26;
+  --status-orphan: #5f5c56;
+  --status-accepted: #2f6b3e;
+  --status-rejected: #5f5c56;
+  --status-flagged: #7a4e0e;
+  --status-ml-failed: #a33b26;
+
+  --status-open-quiet: rgba(107, 104, 98, 0.1);
+  --status-running-quiet: rgba(138, 90, 18, 0.1);
+  --status-complete-quiet: rgba(47, 107, 62, 0.1);
+  --status-failed-quiet: rgba(163, 59, 38, 0.1);
+  --status-paused-quiet: rgba(65, 97, 111, 0.1);
+
+  --trace-motion: #7a5210;
+  --trace-luma: #7c7a74;
+  --trace-presence: rgba(122, 82, 16, 0.18);
+  --trace-audio: #41616f;
+  --trace-grid: #e0dcd3;
+  --trace-window: rgba(26, 27, 29, 0.3);
+  --trace-playhead: #1a1b1d;
+  --player-bg: #101112;
+
+  --shadow-1: 0 1px 2px rgba(40, 38, 34, 0.08);
+  --shadow-2: 0 6px 16px rgba(40, 38, 34, 0.1);
+  --shadow-3: 0 16px 48px rgba(40, 38, 34, 0.16);
+  --shadow-4: 0 24px 64px rgba(40, 38, 34, 0.2);
+}
+
+/* Mobile: the body text token rises to 16px so form controls never trigger
+ * iOS auto-zoom (DESIGN § 4). */
+@media (max-width: 640px) {
+  :root {
+    --text-base: 16px;
+    --rail-width: 100%;
+  }
+}

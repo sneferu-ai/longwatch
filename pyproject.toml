@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "longwatch"
+version = "0.1.0"
+description = "LongWatch — offline footage triage and evidence-integrity ledger"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "the Sneferu Open Builds program" }]
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "psycopg[binary]>=3.2",
+    "onnxruntime>=1.17",
+    "numpy>=1.26",
+    "cryptography>=42",
+    "python-multipart>=0.0.9",
+    "pydantic>=2.6",
+]
+
+[project.optional-dependencies]
+# The dev extra is what an automated environment installs to run the suite —
+# every entry must therefore be available in the prepared/proof environment
+# (pytest, httpx, playwright are pre-baked there). Regeneration-only tooling
+# for the committed ONNX fixtures does NOT belong in it: the proof install
+# runs offline and would fail to resolve it.
+dev = ["pytest>=8", "httpx>=0.27", "playwright>=1.44"]
+# Regenerating tests/fixtures/*.onnx: pip install -e '.[fixtures]'
+# (onnx >= 1.16 is the floor that ships Python 3.12 wheels; numpy is already
+# a runtime dependency). Never needed to run the suite — the generated
+# fixtures are committed and the generators are import-clean without onnx.
+fixtures = ["onnx>=1.16"]
+
+[project.scripts]
+longwatch = "longwatch.__main__:main"
+
+[tool.setuptools]
+packages = ["longwatch"]
+include-package-data = true
+
+# packaging strategy: the Vite build output (JS/CSS/assets) is copied into
+# longwatch/static/ by the Dockerfile's `spa` stage and by scripts/build_spa.sh;
+# it is declared here so a wheel/sdist carries the built SPA.
+[tool.setuptools.package-data]
+longwatch = ["static/**/*", "static/*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]

@@ -1,0 +1,25 @@
+{
+  "schema": "longwatch-model-pins-v1",
+  "note": "Sources and digest pins for the two model artifacts the Dockerfile's models stage fetches at image-build time. URLs are tried in order until one answers. An empty sha256 means unpinned: the stage still fetches the canonical URL, records the fetched digest beside the model and stamps MODEL_PROVENANCE=fetched_unpinned, so no surface claims a verification that did not happen. Run scripts/pin_models.sh once on a networked machine to fetch both artifacts, fill these digests and commit the file; the no-build-args image build then verifies them (a mismatch fails the build) and stamps MODEL_PROVENANCE=fetched. A build-arg (LONGWATCH_MODEL_URL/_SHA256, LONGWATCH_FACE_MODEL_URL/_SHA256) overrides this file; passing LONGWATCH_MODEL_URL=none disables the fetch deliberately and the in-repo contract fixture is used.",
+  "models": [
+    {
+      "name": "yolov8n.onnx",
+      "role": "detector",
+      "urls": [
+        "https://github.com/ultralytics/assets/releases/download/v8.3.0/yolov8n.onnx",
+        "https://github.com/ultralytics/assets/releases/download/v8.2.0/yolov8n.onnx"
+      ],
+      "sha256": "",
+      "license": "AGPL-3.0"
+    },
+    {
+      "name": "yunet.onnx",
+      "role": "face",
+      "urls": [
+        "https://github.com/opencv/opencv_zoo/raw/main/models/face_detection_yunet/face_detection_yunet_2023mar.onnx"
+      ],
+      "sha256": "",
+      "license": "Apache-2.0"
+    }
+  ]
+}

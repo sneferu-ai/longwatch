@@ -1,0 +1,30 @@
+{
+  "runtime_test_mode": "playwright",
+  "runtime_test_command": "python -m longwatch serve --host 0.0.0.0 --port {port}",
+  "health_endpoint": "/healthz",
+  "requirements_file": "pyproject.toml",
+  "system_deps": ["ffmpeg"],
+  "container_port": 8000,
+  "env_var_names": [
+    "PORT",
+    "LONGWATCH_DATA_DIR",
+    "LONGWATCH_REVIEWER_NAME",
+    "LONGWATCH_OFFLINE",
+    "LONGWATCH_AUTH_TOKEN",
+    "DATABASE_URL"
+  ],
+  "env_defaults": {
+    "LONGWATCH_DATA_DIR": "/data",
+    "LONGWATCH_REVIEWER_NAME": "operator",
+    "LONGWATCH_OFFLINE": "1"
+  },
+  "browser_smoke_plan": [
+    "navigate to http://localhost:{port}/ — the Ingest page, the persistent model-limits disclosure and, on an empty database, the demo-seed button (data-testid=demo-seed)",
+    "click demo-seed; expect a source row badged 'demo · synthetic' whose state becomes ready (poll until the ingest job completes, <= 300 s)",
+    "open Triage; expect a candidate whose data-testid=candidate-explanation names \"this recording's p85\" and a stationary_animal_with_person candidate whose evidence is marked synthetic",
+    "press v on the first candidate; expect the source-resolution pane to open and stream the original file",
+    "press a to accept (reviewer name and a source-viewed indicator appear); press f, type a note, press Enter, reload the page and expect the note to persist",
+    "click Export with default settings and wait for the download; expect a ZIP containing manifest.json, manifest.canonical, manifest.sig, public.pem, candidates.csv, clips/, ledger.jsonl, checksums.sha256, verify_bundle.py, ed25519_verifier.py, VERIFY.md and README.txt",
+    "fetch /healthz; expect HTTP 200"
+  ]
+}

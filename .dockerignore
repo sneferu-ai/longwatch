@@ -1,0 +1,27 @@
+.git
+.gitignore
+.venv
+.cache
+.tmp
+.wheels
+runs
+state
+docs-local
+node_modules
+frontend/node_modules
+frontend/dist
+**/__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+tests/__pycache__
+# the models stage needs exactly one file from tests/ — the committed
+# contract-valid ONNX fixture it falls back to on a network-less build — so the
+# fallback is a plain file copy with no network and no pip; everything else
+# under tests/ stays out of the build context
+tests/*
+!tests/fixtures
+tests/fixtures/*
+!tests/fixtures/model_fixture.onnx
+problem_statement.md
+spec.md
